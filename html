@@ -5,48 +5,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pink & White Mobile Page</title>
 <style>
-    /* Reset default spacing */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    /* Make it fill phone screen */
     body {
         min-height: 100vh;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        /* Pink & white gradient background */
+        font-family: 'Segoe UI', Arial, sans-serif;
         background: linear-gradient(135deg, pink 50%, white 50%);
+        padding: 15px;
     }
 
-    .container {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .header {
+        text-align: center;
+        padding: 20px 0;
     }
 
-    h1 {
+    .header h1 {
         color: #ff4d88;
-        font-size: 1.5rem;
+        font-size: 2rem;
+        font-weight: bold;
     }
 
-    p {
-        color: #444;
+    .official-text {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        text-align: justify;
+        line-height: 1.5;
         font-size: 1rem;
+        color: #333;
+    }
+
+    .video-card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .video-card video {
+        width: 100%;
+        border-radius: 10px;
+        outline: none;
+    }
+
+    .caption {
+        font-size: 0.9rem;
+        color: #444;
+        margin-top: 8px;
+        text-align: center;
     }
 </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome!</h1>
-        <p>This is a phone-friendly pink & white page.</p>
+
+    <div class="header">
+        <h1>Our Official Page</h1>
     </div>
+
+    <!-- Official info area -->
+    <div class="official-text">
+        <p>
+            Happy one month anniversary! 
+            Theres nothing like you on this earth, my Ava <3 
+                             ##MINEFOREVER!
+        </p>
+    </div>
+
+    <!-- Video section with captions -->
+    <div class="video-card">
+        <video controls>
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="caption">Video 1 description or title goes here.</div>
+    </div>
+
+    <div class="video-card">
+        <video controls>
+            <source src="video2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="caption">Video 2 description or title goes here.</div>
+    </div>
+
 </body>
 </html>
