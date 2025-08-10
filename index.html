@@ -2,142 +2,157 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Love</title>
+<title>Pink Love Page</title>
 <style>
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff99cc, #ff66b2);
-        color: white;
-        text-align: center;
+        background: linear-gradient(to bottom right, #ffb6c1, #ff69b4);
         overflow-x: hidden;
     }
+
     .video-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 30px;
-        padding: 20px;
+        gap: 40px;
+        padding: 50px 20px;
     }
+
     video {
         width: 60%;
-        height: 600px; /* Taller videos */
-        object-fit: cover;
+        height: 70vh; /* Makes videos vertically longer */
         border-radius: 15px;
+        object-fit: cover;
     }
+
     h2 {
-        margin: 10px 0;
-    }
-    .angel {
-        position: absolute;
-        right: 20px;
-        top: 15%;
-        width: 200px;
-        opacity: 0.7;
-        pointer-events: none;
-    }
-    .cloud {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        width: 150px;
-        pointer-events: none;
-    }
-    .heart-button {
-        background-color: #ff4d88;
-        border: none;
-        padding: 15px 25px;
-        font-size: 20px;
-        border-radius: 50px;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: transform 0.2s;
         color: white;
+        font-size: 24px;
+        margin-top: 10px;
     }
-    .heart-button:active {
-        transform: scale(1.2);
-    }
-    .love-text {
-        display: none;
-        font-size: 50px;
-        margin-top: 20px;
-        font-weight: bold;
-    }
+
     /* Floating hearts */
     .heart {
         position: fixed;
+        color: rgba(255, 0, 102, 0.7);
         font-size: 20px;
-        color: #ff3366;
-        animation: float 6s linear infinite;
+        animation: floatUp 5s linear infinite;
+        z-index: 2;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(1); opacity: 1; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Angel & cloud images */
+    .angel {
+        position: fixed;
+        right: 20px;
+        top: 15%;
         opacity: 0.7;
+        width: 180px;
         z-index: 1;
     }
-    @keyframes float {
-        0% { transform: translateY(100vh) scale(1); opacity: 0; }
-        10% { opacity: 1; }
-        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+
+    .cloud {
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        width: 150px;
+        z-index: 1;
+    }
+
+    /* Button styles */
+    #loveButton {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: pink;
+        border: none;
+        padding: 15px 20px;
+        font-size: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        z-index: 3;
+    }
+
+    #loveMessage {
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        z-index: 4;
+        text-shadow: 2px 2px 10px black;
     }
 </style>
 </head>
 <body>
 
-<img src="angel.webp" alt="Angel Wings" class="angel">
-<img src="cloud.webp" alt="Cloud" class="cloud">
+<img src="ANGEL.WEBP" alt="Angel" class="angel">
+<img src="CLOUD.WEBP" alt="Cloud" class="cloud">
+
+<div id="loveMessage">I LOVE YOU BABY</div>
 
 <div class="video-container">
     <div>
+        <video autoplay muted loop playsinline>
+            <source src="VIDEO1.MOV" type="video/quicktime">
+        </video>
         <h2>My Love</h2>
-        <video autoplay loop muted playsinline>
-            <source src="video1.MOV" type="video/quicktime">
-            Your browser does not support the video tag.
-        </video>
     </div>
     <div>
+        <video autoplay muted loop playsinline>
+            <source src="VIDEO2.MOV" type="video/quicktime">
+        </video>
         <h2>Our Memories</h2>
-        <video autoplay loop muted playsinline>
-            <source src="video2.MOV" type="video/quicktime">
-            Your browser does not support the video tag.
-        </video>
     </div>
     <div>
-        <h2>Together Forever</h2>
-        <video autoplay loop muted playsinline>
-            <source src="video3.MOV" type="video/quicktime">
-            Your browser does not support the video tag.
+        <video autoplay muted loop playsinline>
+            <source src="VIDEO3.MOV" type="video/quicktime">
         </video>
+        <h2>Forever Us</h2>
     </div>
 </div>
 
-<button class="heart-button" onclick="toggleHeartBunny()">❤️</button>
-<div class="love-text">I LOVE YOU BABY</div>
+<button id="loveButton">❤️</button>
 
 <script>
-let isHeart = true;
-function toggleHeartBunny() {
-    const button = document.querySelector('.heart-button');
-    const loveText = document.querySelector('.love-text');
-    button.textContent = isHeart ? '🐰' : '❤️';
-    isHeart = !isHeart;
-    loveText.style.display = 'block';
-    setTimeout(() => {
-        loveText.style.display = 'none';
-    }, 1000);
-}
+    // Floating hearts
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 500);
 
-// Create floating hearts
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.textContent = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => {
-        heart.remove();
-    }, 8000);
-}
-setInterval(createHeart, 500);
+    // Button click
+    const button = document.getElementById('loveButton');
+    const message = document.getElementById('loveMessage');
+    let showingHeart = true;
+
+    button.addEventListener('click', () => {
+        button.style.transform = 'scale(1.5)';
+        message.style.display = 'block';
+        setTimeout(() => {
+            button.style.transform = 'scale(1)';
+            message.style.display = 'none';
+        }, 1000);
+
+        button.textContent = showingHeart ? '🐰' : '❤️';
+        showingHeart = !showingHeart;
+    });
 </script>
 
 </body>
