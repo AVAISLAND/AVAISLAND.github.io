@@ -18,6 +18,8 @@
     padding: 20px;
     line-height: 1.5;
     text-align: center;
+    position: relative;
+    overflow-x: hidden;
   }
   .header-text {
     font-size: 1.3rem;
@@ -32,7 +34,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 420px;
+    max-width: 460px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -49,11 +51,12 @@
   }
   video {
     width: 100%;
-    max-height: 280px;
+    max-height: 360px;
     border-radius: 14px;
     outline: none;
     display: block;
     object-fit: cover;
+    cursor: pointer;
   }
   .caption {
     font-size: 1rem;
@@ -104,6 +107,26 @@
     opacity: 1;
     pointer-events: all;
   }
+  /* Stickers styling */
+  .sticker {
+    position: fixed;
+    z-index: 1000;
+    user-select: none;
+    pointer-events: none;
+  }
+  .sticker.angel {
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 80px;
+    height: auto;
+  }
+  .sticker.cloud {
+    top: 15px;
+    left: 15px;
+    width: 100px;
+    height: auto;
+  }
 </style>
 </head>
 <body>
@@ -116,24 +139,24 @@
 
   <div class="video-grid">
     <div class="video-card">
-      <video autoplay muted loop playsinline>
-        <source src="video1.MOV" type="video/quicktime" />
+      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video1.mov')">
+        <source src="video1.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
       <div class="caption">Video 1 – My Ava</div>
     </div>
 
     <div class="video-card">
-      <video autoplay muted loop playsinline>
-        <source src="video2.MOV" type="video/quicktime" />
+      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video2.mov')">
+        <source src="video2.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
       <div class="caption">Video 2 – My heart</div>
     </div>
 
     <div class="video-card">
-      <video autoplay muted loop playsinline>
-        <source src="video3.MOV" type="video/quicktime" />
+      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video3.mov')">
+        <source src="video3.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
       <div class="caption">Video 3 – My love</div>
@@ -146,24 +169,34 @@
   <!-- Overlay Message -->
   <div class="love-message" id="loveMessage">I LOVE YOU BABY</div>
 
-  <script>
-    const loveBtn = document.getElementById('loveBtn');
-    const loveMessage = document.getElementById('loveMessage');
-    let isHeart = true;
+  <!-- Stickers -->
+  <img src="angel.webp" alt="Angel Wings" class="sticker angel" />
+  <img src="cloud.webp" alt="Cloud" class="sticker cloud" />
 
-    loveBtn.addEventListener('click', () => {
-      // Toggle icon
-      isHeart = !isHeart;
-      loveBtn.textContent = isHeart ? '❤️' : '🐰';
+<script>
+  const loveBtn = document.getElementById('loveBtn');
+  const loveMessage = document.getElementById('loveMessage');
+  let isHeart = true;
 
-      // Show message
-      loveMessage.classList.add('show');
+  loveBtn.addEventListener('click', () => {
+    // Toggle icon
+    isHeart = !isHeart;
+    loveBtn.textContent = isHeart ? '❤️' : '🐰';
 
-      // Hide message after 1.5 seconds
-      setTimeout(() => {
-        loveMessage.classList.remove('show');
-      }, 1500);
-    });
-  </script>
+    // Show message
+    loveMessage.classList.add('show');
+
+    // Hide message after 1.5 seconds
+    setTimeout(() => {
+      loveMessage.classList.remove('show');
+    }, 1500);
+  });
+
+  // Open video in new tab on click for fullscreen experience
+  function openFullscreen(videoFile) {
+    window.open(videoFile, '_blank');
+  }
+</script>
+
 </body>
 </html>
