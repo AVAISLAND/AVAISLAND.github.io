@@ -5,11 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Happy Anniversary ❤️🐰</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
   body {
     min-height: 100vh;
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -27,44 +22,33 @@
     margin-bottom: 30px;
     white-space: pre-line;
     max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
   }
   .video-grid {
+    max-width: 460px;
+    margin: 0 auto 40px;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 460px;
-    margin-left: auto;
-    margin-right: auto;
   }
   .video-card {
     background: rgba(255, 255, 255, 0.12);
     padding: 18px;
     border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .video-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
   }
   video {
     width: 100%;
-    max-height: 360px;
+    max-height: 480px; /* taller vertically */
     border-radius: 14px;
     outline: none;
-    display: block;
     object-fit: cover;
     cursor: pointer;
   }
   .caption {
-    font-size: 1rem;
     margin-top: 12px;
-    color: white;
     font-weight: 600;
   }
-  /* Love Button */
   .love-button {
     background-color: white;
     color: #ff4d88;
@@ -74,21 +58,17 @@
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    margin: 35px auto 0;
+    margin: 0 auto;
     display: block;
-    transition: transform 0.2s ease;
     user-select: none;
+    transition: transform 0.2s ease;
   }
   .love-button:active {
     transform: scale(1.2);
   }
-  /* Big message overlay */
   .love-message {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(255, 102, 178, 0.95);
     display: flex;
     justify-content: center;
@@ -100,19 +80,18 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
   }
   .love-message.show {
     opacity: 1;
     pointer-events: all;
   }
-  /* Stickers styling */
   .sticker {
     position: fixed;
-    z-index: 1000;
     user-select: none;
     pointer-events: none;
+    z-index: 1000;
   }
   .sticker.angel {
     top: 50%;
@@ -139,37 +118,24 @@
 
   <div class="video-grid">
     <div class="video-card">
-      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video1.mov')">
-        <source src="video1.mov" type="video/quicktime" />
-        Your browser does not support the video tag.
-      </video>
+      <video muted loop playsinline preload="auto" controls id="video1" src="video1.mov" type="video/quicktime"></video>
       <div class="caption">Video 1 – My Ava</div>
     </div>
 
     <div class="video-card">
-      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video2.mov')">
-        <source src="video2.mov" type="video/quicktime" />
-        Your browser does not support the video tag.
-      </video>
+      <video muted loop playsinline preload="auto" controls id="video2" src="video2.mov" type="video/quicktime"></video>
       <div class="caption">Video 2 – My heart</div>
     </div>
 
     <div class="video-card">
-      <video autoplay muted loop playsinline preload="auto" onclick="openFullscreen('video3.mov')">
-        <source src="video3.mov" type="video/quicktime" />
-        Your browser does not support the video tag.
-      </video>
+      <video muted loop playsinline preload="auto" controls id="video3" src="video3.mov" type="video/quicktime"></video>
       <div class="caption">Video 3 – My love</div>
     </div>
   </div>
 
-  <!-- Cute Button -->
   <button class="love-button" id="loveBtn">❤️</button>
-
-  <!-- Overlay Message -->
   <div class="love-message" id="loveMessage">I LOVE YOU BABY</div>
 
-  <!-- Stickers -->
   <img src="angel.webp" alt="Angel Wings" class="sticker angel" />
   <img src="cloud.webp" alt="Cloud" class="sticker cloud" />
 
@@ -179,23 +145,19 @@
   let isHeart = true;
 
   loveBtn.addEventListener('click', () => {
-    // Toggle icon
     isHeart = !isHeart;
     loveBtn.textContent = isHeart ? '❤️' : '🐰';
-
-    // Show message
     loveMessage.classList.add('show');
-
-    // Hide message after 1.5 seconds
-    setTimeout(() => {
-      loveMessage.classList.remove('show');
-    }, 1500);
+    setTimeout(() => loveMessage.classList.remove('show'), 1500);
   });
 
-  // Open video in new tab on click for fullscreen experience
-  function openFullscreen(videoFile) {
-    window.open(videoFile, '_blank');
-  }
+  // Optional: clicking video toggles play/pause inline
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('click', () => {
+      if(video.paused) video.play();
+      else video.pause();
+    });
+  });
 </script>
 
 </body>
