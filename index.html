@@ -39,11 +39,12 @@
   }
   video {
     width: 100%;
-    max-height: 480px; /* taller vertically */
+    height: 600px; /* taller vertical */
     border-radius: 14px;
     outline: none;
-    object-fit: cover;
+    object-fit: contain; /* show full video without cropping */
     cursor: pointer;
+    background: black; /* in case video aspect ratio differs */
   }
   .caption {
     margin-top: 12px;
@@ -118,18 +119,18 @@
 
   <div class="video-grid">
     <div class="video-card">
-      <video muted loop playsinline preload="auto" controls id="video1" src="video1.mov" type="video/quicktime"></video>
-      <div class="caption">Video 1 – My Ava</div>
+      <video controls playsinline preload="metadata" src="video1.mov" type="video/quicktime"></video>
+      <div class="caption">My Ava</div>
     </div>
 
     <div class="video-card">
-      <video muted loop playsinline preload="auto" controls id="video2" src="video2.mov" type="video/quicktime"></video>
-      <div class="caption">Video 2 – My heart</div>
+      <video controls playsinline preload="metadata" src="video2.mov" type="video/quicktime"></video>
+      <div class="caption">My heart</div>
     </div>
 
     <div class="video-card">
-      <video muted loop playsinline preload="auto" controls id="video3" src="video3.mov" type="video/quicktime"></video>
-      <div class="caption">Video 3 – My love</div>
+      <video controls playsinline preload="metadata" src="video3.mov" type="video/quicktime"></video>
+      <div class="caption">My love</div>
     </div>
   </div>
 
@@ -149,14 +150,6 @@
     loveBtn.textContent = isHeart ? '❤️' : '🐰';
     loveMessage.classList.add('show');
     setTimeout(() => loveMessage.classList.remove('show'), 1500);
-  });
-
-  // Optional: clicking video toggles play/pause inline
-  document.querySelectorAll('video').forEach(video => {
-    video.addEventListener('click', () => {
-      if(video.paused) video.play();
-      else video.pause();
-    });
   });
 </script>
 
