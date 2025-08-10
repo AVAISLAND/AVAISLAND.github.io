@@ -24,18 +24,84 @@
     .header-text {
         font-size: 1.3rem;
         font-weight: bold;
-        margin-bottom: 20px;
-        white-space: pre-line; /* keeps your spacing & line breaks */
+        margin-bottom: 25px;
+        white-space: pre-line;
+    }
+
+    .video-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .video-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.35);
     }
 
     video {
         width: 100%;
-        max-width: 400px;
         border-radius: 12px;
         outline: none;
         display: block;
-        margin: 0 auto;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .caption {
+        font-size: 1rem;
+        margin-top: 10px;
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Love Button */
+    .love-button {
+        background-color: white;
+        color: #ff4d88;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: transform 0.2s ease;
+    }
+
+    .love-button:active {
+        transform: scale(1.2);
+    }
+
+    /* Big message overlay */
+    .love-message {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 102, 178, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .love-message.show {
+        opacity: 1;
+        pointer-events: all;
     }
 </style>
 </head>
@@ -47,10 +113,50 @@
         ##MINEFOREVER!
     </div>
 
-    <video controls>
-        <source src="video1.mov" type="video/mov">
-        Your browser does not support the video tag.
-    </video>
+    <div class="video-grid">
+        <div class="video-card">
+            <video controls>
+                <source src="video1.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+            </video>
+            <div class="caption">Video 1 – My love</div>
+        </div>
+
+        <div class="video-card">
+            <video controls>
+                <source src="video2.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+            </video>
+            <div class="caption">Video 2 – My heart</div>
+        </div>
+
+        <div class="video-card">
+            <video controls>
+                <source src="video3.mov" type="video/quicktime">
+                Your browser does not support the video tag.
+            </video>
+            <div class="caption">My baby</div>
+        </div>
+    </div>
+
+    <!-- Cute Button -->
+    <button class="love-button" onclick="showLove()">❤️</button>
+
+    <!-- Overlay Message -->
+    <div class="love-message" id="loveMessage">
+        I LOVE YOU BABY
+    </div>
+
+<script>
+    function showLove() {
+        const message = document.getElementById("loveMessage");
+        message.classList.add("show");
+
+        setTimeout(() => {
+            message.classList.remove("show");
+        }, 1500); // message disappears after 1.5 seconds
+    }
+</script>
 
 </body>
 </html>
