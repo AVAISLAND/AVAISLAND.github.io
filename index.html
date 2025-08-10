@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Anniversary ❤️🐰</title>
+<style>
+  body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ff99cc, #ff66b2);
+    color: white;
+    padding: 20px;
+    line-height: 1.5;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .header-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    white-space: pre-line;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .video-grid {
+    max-width: 460px;
+    margin: 0 auto 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .video-card {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+  video {
+    width: 100%;
+    height: 600px; /* taller vertical */
+    border-radius: 14px;
+    outline: none;
+    object-fit: contain; /* show full video without cropping */
+    cursor: pointer;
+    background: black; /* in case video aspect ratio differs */
+  }
+  .caption {
+    margin-top: 12px;
+    font-weight: 600;
+  }
+  .love-button {
+    background-color: white;
+    color: #ff4d88;
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 12px 26px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+  .love-button:active {
+    transform: scale(1.2);
+  }
+  .love-message {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 102, 178, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: white;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    padding: 20px;
+  }
+  .love-message.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .sticker {
+    position: fixed;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .sticker.angel {
+    top: 30%;           /* moved up */
+    right: 15px;
+    transform: translateY(-50%);
+    width: 110px;       /* bigger */
+    height: auto;
+    opacity: 0.7;       /* 70% opacity */
+  }
+  .sticker.cloud {
+    top: 15px;
+    left: 15px;
+    width: 100px;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header-text">
+    Happy one month anniversary!<br />
+    Theres nothing like you on this earth, my Ava &lt;3<br />
+    ##MINEFOREVER!
+  </div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video controls playsinline preload="metadata" src="video1.MOV" type="video/quicktime"></video>
+      <div class="caption">My Ava</div>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata" src="video2.MOV" type="video/quicktime"></video>
+      <div class="caption">My heart</div>
+    </div>
+
+    <div class="video-card">
+      <video controls playsinline preload="metadata" src="video3.MOV" type="video/quicktime"></video>
+      <div class="caption">My love</div>
+    </div>
+  </div>
+
+  <button class="love-button" id="loveBtn">❤️</button>
+  <div class="love-message" id="loveMessage">I LOVE YOU BABY</div>
+
+  <img src="angel.webp" alt="Angel Wings" class="sticker angel" />
+  <img src="cloud.webp" alt="Cloud" class="sticker cloud" />
+
+<script>
+  const loveBtn = document.getElementById('loveBtn');
+  const loveMessage = document.getElementById('loveMessage');
+  let isHeart = true;
+
+  loveBtn.addEventListener('click', () => {
+    isHeart = !isHeart;
+    loveBtn.textContent = isHeart ? '❤️' : '🐰';
+    loveMessage.classList.add('show');
+    setTimeout(() => loveMessage.classList.remove('show'), 1500);
+  });
+</script>
+
+</body>
+</html>
